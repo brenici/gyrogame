@@ -36,13 +36,15 @@ class GameScene: SKScene {
         playerNode = SKSpriteNode(imageNamed: "ball")
         playerNode.position = CGPoint(x: 555, y: -372)
         playerNode.size = CGSize(width: 80, height: 80)
+        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: playerNode.size.width / 2)
         playerNode.physicsBody?.allowsRotation = false
-        playerNode.physicsBody?.linearDamping = 0.4
-        playerNode.physicsBody?.restitution = 0.2
+        playerNode.physicsBody?.density = 7.0               // real steel ball density
+        playerNode.physicsBody?.linearDamping = 0.4         // increased friction
+        playerNode.physicsBody?.restitution = 0.3           // increased restitution
         playerNode.physicsBody?.categoryBitMask = 1
-        playerNode.physicsBody?.contactTestBitMask = 2 | 3 // holes and finish
-        playerNode.physicsBody?.collisionBitMask = 2 // walls
-        playerNode.zPosition = 1 // in front of bg and all holes
+        playerNode.physicsBody?.contactTestBitMask = 2 | 3  // holes and finish
+        playerNode.physicsBody?.collisionBitMask = 2        // walls
+        playerNode.zPosition = 1                            // in front of all nodes
         addChild(playerNode)
     }
     
@@ -54,5 +56,10 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        if let accelerometerData = motionManager.accelerometerData {
+            physicsWorld.gravity = CGVector(
+                dx: accelerometerData.acceleration.y * -80,
+                dy: accelerometerData.acceleration.x * 80)
+        }
     }
 }
