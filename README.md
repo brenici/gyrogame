@@ -12,6 +12,10 @@ Extra:
 - [x] Code documentation 
 - [x] Code validation - (Unit) test cases
 
+<p float="left">
+  <img src="https://repository-images.githubusercontent.com/412749340/6de4e003-3a9d-436a-80bf-fa29d10f7cda" />
+</p>
+
 Minimum requirements:
 * One level
 * Supports iPad and iPhone
