@@ -7,10 +7,24 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
+    // prevent screen rotation
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscapeRight //
+    }
+    
+    // hide home indicator
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
+    // hide status bar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,27 +33,19 @@ class GameViewController: UIViewController {
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit // fit the screen
-                
                 // Present the scene
                 view.presentScene(scene)
             }
             view.ignoresSiblingOrder = true
-//            view.showsFPS = true
-//            view.showsNodeCount = true
+            //            view.showsFPS = true
+            //            view.showsNodeCount = true
         }
     }
-
-    override var shouldAutorotate: Bool {
-        return true
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // ensure home indicator is auto hidden
+        setNeedsUpdateOfHomeIndicatorAutoHidden()
     }
-
-    // prevent screen rotation
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeRight //
-    }
-
-    // show game board only
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    
 }
