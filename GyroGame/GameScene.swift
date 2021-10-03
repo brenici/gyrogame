@@ -14,12 +14,13 @@ class GameScene: SKScene {
     private var playerNode: SKSpriteNode!
     
     override func didMove(to view: SKView) {
+        physicsWorld.gravity = .zero
+        physicsWorld.contactDelegate = self
         loadScene()
         startMotionManager()
     }
     
     private func loadScene() {
-        physicsWorld.gravity = .zero
         addSceneBackground()
         createPlayer()
     }
@@ -58,8 +59,41 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(
-                dx: accelerometerData.acceleration.y * -80,
-                dy: accelerometerData.acceleration.x * 80)
+                dx: accelerometerData.acceleration.y * -98,
+                dy: accelerometerData.acceleration.x * 98)
         }
     }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node == playerNode {
+            if let nodeB = contact.bodyB.node {
+                playerContacted(with: nodeB)
+            }
+        } else if contact.bodyB.node == playerNode {
+            if let nodeA = contact.bodyA.node {
+                playerContacted(with: nodeA)
+            }
+        }
+    }
+    
+    private func playerContacted(with node: SKNode) {
+        if node.name == "holeNode" { // trap
+            // hole contacted method
+            // ball animation
+            // restart game
+            print("contacted hole :(")
+        } else if node.name == "finishNode" { // finish
+            print("contacted finish :)")
+            // finish contacted method
+            // ball animation
+            // restart game
+        } else { // wall
+            print("wall")
+            // haptic feedback?
+        }
+    }
+
 }
