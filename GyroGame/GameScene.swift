@@ -14,6 +14,7 @@ class GameScene: SKScene {
     var playerNode: SKSpriteNode!
     private var isGameOver = false
     private let hapticFeedback = UIImpactFeedbackGenerator(style: .light)
+    private let hapticNotification = UINotificationFeedbackGenerator()
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = .zero
@@ -25,6 +26,7 @@ class GameScene: SKScene {
     private func loadScene() {
         addSceneBackground()
         createPlayer()
+        setupHolesRadius()
     }
     
     private func startMotionManager() {
@@ -51,6 +53,15 @@ class GameScene: SKScene {
         addChild(playerNode)
     }
     
+    private func setupHolesRadius() { // make hole 2x smaller
+        for node in self.children {
+            if node.name == "holeNode" {
+                node.physicsBody = SKPhysicsBody(circleOfRadius: node.frame.size.width / 4)
+                node.physicsBody?.isDynamic = false // default true
+            }
+        }
+    }
+    
     private func addSceneBackground() {
         let background = SKSpriteNode(imageNamed: "background.jpg")
         background.zPosition = -1
@@ -71,9 +82,7 @@ class GameScene: SKScene {
         guard isGameOver == false else { return }
         // the speed is proportional to the degree the device is turned
         if let accelerometerData = motionManager.accelerometerData {
-            physicsWorld.gravity = CGVector(
-                dx: accelerometerData.acceleration.y * -60,
-                dy: accelerometerData.acceleration.x * 60)
+            physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.y * -60, dy: accelerometerData.acceleration.x * 60)
         }
     }
 }
@@ -103,6 +112,7 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func holeContacted(position: CGPoint) {
+        hapticNotification.notificationOccurred(.error)
         endingGame()
         // animating and removing falling ball (playerNode)
         playerNode.run(ballActionSequence(to: position)) { [unowned self] in
@@ -111,6 +121,7 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func finishContacted(position: CGPoint) {
+        hapticNotification.notificationOccurred(.error)
         endingGame()
         // animating and removing falling ball (playerNode)
         playerNode.run(ballActionSequence(to: position)) { [unowned self] in
