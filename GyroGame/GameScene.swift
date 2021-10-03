@@ -64,6 +64,7 @@ class GameScene: SKScene {
     
     private func addSceneBackground() {
         let background = SKSpriteNode(imageNamed: "background.jpg")
+        background.blendMode = .replace // no alpha channel
         background.zPosition = -1
         addChild(background)
     }

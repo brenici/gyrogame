@@ -12,7 +12,7 @@ class GameViewController: UIViewController {
     
     // prevent screen rotation
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeRight //
+        return .landscapeRight
     }
     
     // hide home indicator
@@ -37,8 +37,6 @@ class GameViewController: UIViewController {
                 view.presentScene(scene)
             }
             view.ignoresSiblingOrder = true
-            //            view.showsFPS = true
-            //            view.showsNodeCount = true
         }
     }
     
