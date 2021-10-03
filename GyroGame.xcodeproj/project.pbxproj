@@ -16,6 +16,9 @@
 		7A2EA2A727085BCF00DE693F /* GyroGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2EA2A627085BCF00DE693F /* GyroGameTests.swift */; };
 		7A2EA2B227085BCF00DE693F /* GyroGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2EA2B127085BCF00DE693F /* GyroGameUITests.swift */; };
 		7A2EA2D82709BF0200DE693F /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A2EA2D72709BF0200DE693F /* background.jpg */; };
+		7A2EA2DC2709C17D00DE693F /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A2EA2D92709C17D00DE693F /* hole.png */; };
+		7A2EA2DD2709C17D00DE693F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A2EA2DA2709C17D00DE693F /* ball.png */; };
+		7A2EA2DE2709C17D00DE693F /* finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A2EA2DB2709C17D00DE693F /* finish.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		7A2EA2B127085BCF00DE693F /* GyroGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroGameUITests.swift; sourceTree = "<group>"; };
 		7A2EA2B327085BCF00DE693F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A2EA2D72709BF0200DE693F /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		7A2EA2D92709C17D00DE693F /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hole.png; sourceTree = "<group>"; };
+		7A2EA2DA2709C17D00DE693F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
+		7A2EA2DB2709C17D00DE693F /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +141,9 @@
 			isa = PBXGroup;
 			children = (
 				7A2EA2D72709BF0200DE693F /* background.jpg */,
+				7A2EA2DA2709C17D00DE693F /* ball.png */,
+				7A2EA2DB2709C17D00DE693F /* finish.png */,
+				7A2EA2D92709C17D00DE693F /* hole.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -243,6 +252,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A2EA29A27085BCD00DE693F /* Main.storyboard in Resources */,
+				7A2EA2DE2709C17D00DE693F /* finish.png in Resources */,
+				7A2EA2DC2709C17D00DE693F /* hole.png in Resources */,
+				7A2EA2DD2709C17D00DE693F /* ball.png in Resources */,
 				7A2EA2D82709BF0200DE693F /* background.jpg in Resources */,
 				7A2EA29127085BCD00DE693F /* GameScene.sks in Resources */,
 				7A2EA29C27085BCE00DE693F /* Assets.xcassets in Resources */,
