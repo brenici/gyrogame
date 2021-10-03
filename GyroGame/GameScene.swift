@@ -56,7 +56,6 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(
                 dx: accelerometerData.acceleration.y * -98,
@@ -80,20 +79,32 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func playerContacted(with node: SKNode) {
-        if node.name == "holeNode" { // trap
-            // hole contacted method
-            // ball animation
-            // restart game
-            print("contacted hole :(")
-        } else if node.name == "finishNode" { // finish
-            print("contacted finish :)")
-            // finish contacted method
-            // ball animation
-            // restart game
+        if node.name == "holeNode" {
+            holeContacted(position: node.position)
+        } else if node.name == "finishNode" {
+            finishContacted(position: node.position)
         } else { // wall
-            print("wall")
-            // haptic feedback?
+            print("wall") // haptic feedback?
         }
+    }
+    
+    private func holeContacted(position: CGPoint) {
+        playerNode.run(ballActionSequence(to: position)) { [unowned self] in
+            createPlayer() // restart the game
+        }
+    }
+    
+    private func finishContacted(position: CGPoint) {
+        playerNode.run(ballActionSequence(to: position)) { [unowned self] in
+            createPlayer() // restart the game
+        }
+    }
+    
+    private func ballActionSequence(to position: CGPoint) -> SKAction {
+        let move = SKAction.move(to: position, duration: 0.2)
+        let scale = SKAction.scale(to: 0.0001, duration: 0.24)
+        let remove = SKAction.removeFromParent()
+        return SKAction.sequence([move, scale, remove])
     }
 
 }
