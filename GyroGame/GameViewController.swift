@@ -18,16 +18,14 @@ class GameViewController: UIViewController {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
+                scene.scaleMode = .aspectFit // fit the screen
                 
                 // Present the scene
                 view.presentScene(scene)
             }
-            
             view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
+//            view.showsFPS = true
+//            view.showsNodeCount = true
         }
     }
 
@@ -35,14 +33,12 @@ class GameViewController: UIViewController {
         return true
     }
 
+    // prevent screen rotation
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
+        return .landscapeRight //
     }
 
+    // show game board only
     override var prefersStatusBarHidden: Bool {
         return true
     }
