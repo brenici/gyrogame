@@ -13,6 +13,7 @@ class GameScene: SKScene {
     private var motionManager: CMMotionManager!
     private var playerNode: SKSpriteNode!
     private var isGameOver = false
+    private let hapticFeedback = UIImpactFeedbackGenerator(style: .light)
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = .zero
@@ -41,7 +42,7 @@ class GameScene: SKScene {
         playerNode.physicsBody = SKPhysicsBody(circleOfRadius: playerNode.size.width / 2)
         playerNode.physicsBody?.allowsRotation = false
         playerNode.physicsBody?.density = 7.0               // real steel ball density
-        playerNode.physicsBody?.linearDamping = 0.4         // increased friction
+        playerNode.physicsBody?.linearDamping = 0.5         // increased friction
         playerNode.physicsBody?.restitution = 0.3           // increased restitution
         playerNode.physicsBody?.categoryBitMask = 1
         playerNode.physicsBody?.contactTestBitMask = 2 | 3  // holes and finish
@@ -71,8 +72,8 @@ class GameScene: SKScene {
         // the speed is proportional to the degree the device is turned
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(
-                dx: accelerometerData.acceleration.y * -80,
-                dy: accelerometerData.acceleration.x * 80)
+                dx: accelerometerData.acceleration.y * -60,
+                dy: accelerometerData.acceleration.x * 60)
         }
     }
 }
@@ -96,8 +97,8 @@ extension GameScene: SKPhysicsContactDelegate {
             holeContacted(position: node.position)
         } else if node.name == "finishNode" {
             finishContacted(position: node.position)
-        } else { // wall
-            print("wall") // haptic feedback?
+        } else { // wall contacted
+            hapticFeedback.impactOccurred()
         }
     }
     
