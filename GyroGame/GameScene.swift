@@ -12,6 +12,7 @@ class GameScene: SKScene {
     
     private var motionManager: CMMotionManager!
     private var playerNode: SKSpriteNode!
+    private var isGameOver = false
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = .zero
@@ -55,11 +56,23 @@ class GameScene: SKScene {
         addChild(background)
     }
     
+    private func endingGame() {
+        self.playerNode.physicsBody?.isDynamic = false
+        isGameOver = true
+    }
+    
+    private func restartGame() {
+        createPlayer()
+        isGameOver = false
+    }
+    
     override func update(_ currentTime: TimeInterval) {
+        guard isGameOver == false else { return }
+        // the speed is proportional to the degree the device is turned
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(
-                dx: accelerometerData.acceleration.y * -98,
-                dy: accelerometerData.acceleration.x * 98)
+                dx: accelerometerData.acceleration.y * -80,
+                dy: accelerometerData.acceleration.x * 80)
         }
     }
 }
@@ -89,14 +102,18 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func holeContacted(position: CGPoint) {
+        endingGame()
+        // animating and removing falling ball (playerNode)
         playerNode.run(ballActionSequence(to: position)) { [unowned self] in
-            createPlayer() // restart the game
+            restartGame()
         }
     }
     
     private func finishContacted(position: CGPoint) {
+        endingGame()
+        // animating and removing falling ball (playerNode)
         playerNode.run(ballActionSequence(to: position)) { [unowned self] in
-            createPlayer() // restart the game
+            restartGame()
         }
     }
     
