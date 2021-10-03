@@ -10,19 +10,28 @@ import XCTest
 
 class GyroGameTests: XCTestCase {
 
+    var gameScene: GameScene!
+    
     override func setUpWithError() throws {
         // This method is called before the invocation of each test method in the class.
-        
+        gameScene = GameScene()
     }
 
     override func tearDownWithError() throws {
         // This method is called after the invocation of each test method in the class.
-        
+        gameScene.removeFromParent()
     }
 
-    func testExample() throws {
+    func test_playerNode_is_nil() throws {
         // This is an example of a functional test case.
-        
+        let playerNode = gameScene.playerNode
+        XCTAssertNil(playerNode)
+    }
+    
+    func test_playerNode_is_not_nil() throws {
+        // This is an example of a functional test case.
+        let playerNode = gameScene.playerNode
+        XCTAssertNotNil(playerNode)
     }
 
     func testPerformanceExample() throws {

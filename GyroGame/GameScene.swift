@@ -11,7 +11,7 @@ import CoreMotion
 class GameScene: SKScene {
     
     private var motionManager: CMMotionManager!
-    private var playerNode: SKSpriteNode!
+    var playerNode: SKSpriteNode!
     private var isGameOver = false
     private let hapticFeedback = UIImpactFeedbackGenerator(style: .light)
     
