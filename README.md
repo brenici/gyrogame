@@ -1,15 +1,11 @@
 # GyroGame
 
-Swift Core Motion Game Challenge
+iOS/Swift Core Motion SpriteKit Game
 
-A very small game where a user should control a ball on the screen with motion sensors (accelerometer, gyroscope, etc). 
-
-Like there is a ball on the screen and the point where it should go. 
-
-The speed should be proportional to the degree the device is turned.
+A mini-game written in Swift to control the ball on the screen with motion sensors only (accelerometer, gyroscope).
 
 Extra:
-- [x] Code documentation 
+- [x] Code documentation
 - [x] Code validation - (Unit) test cases
 
 <p float="left">
@@ -19,15 +15,17 @@ Extra:
 Minimum requirements:
 * One level
 * Supports iPad and iPhone
-* Landscape mode (prevent rotation)
+* Landscape mode only
 * Game restart
+
+Note: Accelerometer and gyroscope testing is not possible on a simulator. Please run and test the application on a real iOS device.
 
 Frameworks:
 * SpriteKit
 * Core Motion
 
 To do:
-* New levels / increasing dificulty (array, txt, json)
-* Automatic level generator
+* New levels / increasing difficulty (array, json)
+* Level generator
 * Score board
-* Bonus collection
+* Bonuses 
